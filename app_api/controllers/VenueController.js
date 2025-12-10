@@ -40,6 +40,7 @@ exports.listVenues = async (req, res) => {
             res.status(404).json({
                 message: "Civarda mekan yok!",
             });
+            return;
         }
 
         const venues = result.map((venue) => ({
@@ -140,6 +141,7 @@ exports.deleteVenue = async (req, res) => {
             res.status(404).json({
                 message: "Mekan Bulunamadı!",
             });
+            return;
         }
 
         res.status(200).json({

@@ -1,6 +1,8 @@
 const Venue = require("../models/venue");
 
 const getRating = (comments) => {
+    if (!comments || comments.length === 0) return 0;
+
     return Math.ceil(
         comments.reduce((prev, cur) => prev + Number(cur.rating), 0) /
             comments.length,
@@ -16,6 +18,7 @@ exports.addComment = async (req, res) => {
             res.status(404).json({
                 message: "Mekan Bulunamadı!",
             });
+            return;
         }
 
         venue.comments.push(req.body);
@@ -37,14 +40,14 @@ exports.getComment = async (req, res) => {
             "name comments",
         );
         if (!venue) {
-            res.status(404).json({ message: "Mekan Bulunamadı" });
+            res.status(404).json({ message: "Mekan Bulunamadı!" });
             return;
         }
 
         const comment = venue.comments.id(req.params.commentId);
         if (!comment) {
             res.status(404).json({
-                message: "Yorum Bulunamadı",
+                message: "Yorum Bulunamadı!",
             });
             return;
         }
@@ -70,6 +73,7 @@ exports.updateComment = async (req, res) => {
             res.status(404).json({
                 message: "Mekan Bulunamadı!",
             });
+            return;
         }
 
         const comment = venue.comments.id(req.params.commentId);
@@ -77,6 +81,7 @@ exports.updateComment = async (req, res) => {
             res.status(404).json({
                 message: "Yorum Bulunamadı!",
             });
+            return;
         }
 
         comment.set(req.body);
@@ -99,6 +104,7 @@ exports.deleteComment = async (req, res) => {
             res.status(404).json({
                 message: "Mekan Bulunamadı!",
             });
+            return;
         }
 
         const comment = venue.comments.id(req.params.commentId);
@@ -106,6 +112,7 @@ exports.deleteComment = async (req, res) => {
             res.status(404).json({
                 message: "Yorum Bulunamadı!",
             });
+            return;
         }
 
         comment.deleteOne();
