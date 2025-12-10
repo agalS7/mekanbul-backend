@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const DB_URI = "mongodb+srv://admin_webtek:2d0W5ntdbpuj2TKD@cluster-webtek.zwrjigj.mongodb.net/mekanbul?appName=Cluster-WebTek";
-mongoose.connect(DB_URI);
 
-require("./venue");
+// const DB_URI = "mongodb://localhost:27017/mekanbul";
+const DB_URI = process.env.MONGODB_URI;
+mongoose.connect(DB_URI);
 
 mongoose.connection.on("connected", () => {
     console.log(DB_URI + " adresindeki MongoDB Sunucusuna bağlanıldı!");

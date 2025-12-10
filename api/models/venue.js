@@ -28,10 +28,10 @@ const s_venue = new mongoose.Schema({
         max: 5,
         default: 0,
     },
-    foodAndDrink: [String],
+    foodanddrink: [String],
     coordinates: { type: [Number], index: "2dsphere", },
     hours: [s_hour],
     comments: [s_comment],
 });
 
-mongoose.model("venue", s_venue, "venues");
+module.exports = mongoose.model("venue", s_venue, "venues");
