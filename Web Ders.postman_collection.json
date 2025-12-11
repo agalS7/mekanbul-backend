@@ -7,91 +7,23 @@
 	},
 	"item": [
 		{
-			"name": "Mekan Listele",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "https://mekanbul-backend-eight.vercel.app/api/venues?lat=37.82&long=30.52",
-					"protocol": "https",
-					"host": [
-						"mekanbul-backend-eight",
-						"vercel",
-						"app"
-					],
-					"path": [
-						"api",
-						"venues"
-					],
-					"query": [
-						{
-							"key": "lat",
-							"value": "37.82"
-						},
-						{
-							"key": "long",
-							"value": "30.52"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Mekan Çek",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://mekanbul-backend-eight.vercel.app/api/venues/6927337070046d50b859ba31",
-					"protocol": "https",
-					"host": [
-						"mekanbul-backend-eight",
-						"vercel",
-						"app"
-					],
-					"path": [
-						"api",
-						"venues",
-						"6927337070046d50b859ba31"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Yorum Çek",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://mekanbul-backend-eight.vercel.app/api/venues/6927337070046d50b859ba31/comments/692733703556046c0d0afade",
-					"protocol": "https",
-					"host": [
-						"mekanbul-backend-eight",
-						"vercel",
-						"app"
-					],
-					"path": [
-						"api",
-						"venues",
-						"6927337070046d50b859ba31",
-						"comments",
-						"692733703556046c0d0afade"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Mekan Ekle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const id = pm.response.json()._id;\r",
+							"if (id) {\r",
+							"    pm.environment.set(\"venueId\", id);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -182,7 +114,83 @@
 			"response": []
 		},
 		{
+			"name": "Mekan Listele",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://mekanbul-backend-eight.vercel.app/api/venues?lat=37.82&long=30.52",
+					"protocol": "https",
+					"host": [
+						"mekanbul-backend-eight",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"venues"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "37.82"
+						},
+						{
+							"key": "long",
+							"value": "30.52"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mekan Çek",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://mekanbul-backend-eight.vercel.app/api/venues/{{venueId}}",
+					"protocol": "https",
+					"host": [
+						"mekanbul-backend-eight",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"venues",
+						"{{venueId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Yorum Ekle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const commentId = pm.response.json()._id;\r",
+							"if (commentId) {\r",
+							"    pm.environment.set(\"commentId\", commentId);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -207,7 +215,7 @@
 					]
 				},
 				"url": {
-					"raw": "https://mekanbul-backend-eight.vercel.app/api/venues/6939df415ec1e231d71503a6/comments",
+					"raw": "https://mekanbul-backend-eight.vercel.app/api/venues/{{venueId}}/comments",
 					"protocol": "https",
 					"host": [
 						"mekanbul-backend-eight",
@@ -217,8 +225,32 @@
 					"path": [
 						"api",
 						"venues",
-						"6939df415ec1e231d71503a6",
+						"{{venueId}}",
 						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Yorum Çek",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://mekanbul-backend-eight.vercel.app/api/venues/{{venueId}}/comments/{{commentId}}",
+					"protocol": "https",
+					"host": [
+						"mekanbul-backend-eight",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"venues",
+						"{{venueId}}",
+						"comments",
+						"{{commentId}}"
 					]
 				}
 			},
@@ -290,7 +322,7 @@
 					]
 				},
 				"url": {
-					"raw": "https://mekanbul-backend-eight.vercel.app/api/venues/6939df415ec1e231d71503a6",
+					"raw": "https://mekanbul-backend-eight.vercel.app/api/venues/{{venueId}}",
 					"protocol": "https",
 					"host": [
 						"mekanbul-backend-eight",
@@ -300,7 +332,7 @@
 					"path": [
 						"api",
 						"venues",
-						"6939df415ec1e231d71503a6"
+						"{{venueId}}"
 					]
 				}
 			},
@@ -332,7 +364,7 @@
 					]
 				},
 				"url": {
-					"raw": "https://mekanbul-backend-eight.vercel.app/api/venues/6939df415ec1e231d71503a6/comments/6939dfad5ec1e231d71503ab",
+					"raw": "https://mekanbul-backend-eight.vercel.app/api/venues/{{venueId}}/comments/{{commentId}}",
 					"protocol": "https",
 					"host": [
 						"mekanbul-backend-eight",
@@ -342,9 +374,9 @@
 					"path": [
 						"api",
 						"venues",
-						"6939df415ec1e231d71503a6",
+						"{{venueId}}",
 						"comments",
-						"6939dfad5ec1e231d71503ab"
+						"{{commentId}}"
 					]
 				}
 			},
@@ -356,7 +388,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://mekanbul-backend-eight.vercel.app/api/venues/6939df415ec1e231d71503a6/comments/6939dfad5ec1e231d71503ab",
+					"raw": "https://mekanbul-backend-eight.vercel.app/api/venues/{{venueId}}/comments/{{commentId}}",
 					"protocol": "https",
 					"host": [
 						"mekanbul-backend-eight",
@@ -366,9 +398,9 @@
 					"path": [
 						"api",
 						"venues",
-						"6939df415ec1e231d71503a6",
+						"{{venueId}}",
 						"comments",
-						"6939dfad5ec1e231d71503ab"
+						"{{commentId}}"
 					]
 				}
 			},
@@ -380,7 +412,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://mekanbul-backend-eight.vercel.app/api/venues/6939df415ec1e231d71503a6",
+					"raw": "https://mekanbul-backend-eight.vercel.app/api/venues/{{venueId}}",
 					"protocol": "https",
 					"host": [
 						"mekanbul-backend-eight",
@@ -390,7 +422,7 @@
 					"path": [
 						"api",
 						"venues",
-						"6939df415ec1e231d71503a6"
+						"{{venueId}}"
 					]
 				}
 			},
