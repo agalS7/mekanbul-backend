@@ -37,9 +37,7 @@ exports.listVenues = async (req, res) => {
         ]);
 
         if (!result) {
-            res.status(404).json({
-                message: "Civarda mekan yok!",
-            });
+            res.status(404).json([]);
             return;
         }
 
@@ -55,10 +53,10 @@ exports.listVenues = async (req, res) => {
         if (venues.length > 0) {
             res.status(200).json(venues);
         } else {
-            res.status(404).json({ message: "Civarda mekan yok!" });
+            res.status(404).json([]);
         }
     } catch {
-        res.status(404).json({ message: "Civarda mekan yok!" });
+        res.status(404).json([]);
     }
 };
 
